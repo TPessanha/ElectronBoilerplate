@@ -3,19 +3,41 @@
  */
 
 const path = require("path");
-//const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require("./webpack.config.base");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
 	devtool: "cheap-module-source-map",
 	entry: { index: path.join(__dirname, "src", "index") },
 	module: {
-		rules: []
+		rules: [
+			{
+				test: /\.(scss|sass)$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					"sass-loader" // compiles Sass to CSS
+				],
+				//include: path.join(__dirname, "src", "components"),
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				use: [MiniCssExtractPlugin.loader, "css-loader"],
+				//include: path.join(__dirname, "src", "components"),
+				exclude: /node_modules/
+			}
+		]
 	},
 	plugins: [
+		new MiniCssExtractPlugin({
+			filename: "[name].css",
+			chunkFilename: "[id].css"
+		}),
+
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: "./src/index.ejs",

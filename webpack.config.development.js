@@ -8,6 +8,7 @@ const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const port = process.env.PORT || 3000;
 
@@ -39,6 +40,20 @@ module.exports = merge(baseConfig, {
 						}
 					}
 				],
+				exclude: /node_modules/
+			},
+			{
+				test: /\.(scss|sass)$/,
+				use: [
+					"style-loader",
+					"css-loader",
+					"sass-loader" // compiles Sass to CSS
+				],
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				use: ["style-loader", "css-loader"],
 				exclude: /node_modules/
 			}
 		]

@@ -3,7 +3,6 @@
  */
 
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //const { dependencies: externals } = require("./app/package.json");
 
 module.exports = {
@@ -22,29 +21,6 @@ module.exports = {
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
 				use: "url-loader"
-			},
-			{
-				test: /\.(scss|sass)$/,
-				use: [
-					process.env.NODE_ENV !== "production"
-						? "style-loader"
-						: MiniCssExtractPlugin.loader,
-					"css-loader",
-					"sass-loader" // compiles Sass to CSS
-				],
-				//include: path.join(__dirname, "src", "components"),
-				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: [
-					process.env.NODE_ENV !== "production"
-						? "style-loader"
-						: MiniCssExtractPlugin.loader,
-					"css-loader"
-				],
-				//include: path.join(__dirname, "src", "components"),
-				exclude: /node_modules/
 			},
 			{
 				test: /\.ts$/,
@@ -95,14 +71,7 @@ module.exports = {
 		__dirname: false,
 		__filename: false
 	},
-	plugins: [
-		new MiniCssExtractPlugin({
-			// Options similar to the same options in webpackOptions.output
-			// both options are optional
-			filename: "[name].css",
-			chunkFilename: "[id].css"
-		})
-	],
+	plugins: [],
 	externals: []
 	/* externals: {
 		react: "React",
