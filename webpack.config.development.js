@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 module.exports = merge(baseConfig, {
 	devtool: "inline-source-map",
-	mode: "development",
+	mode: process.env.NODE_ENV || "development",
 	//context: path.join(__dirname),
 	entry: [
 		"react-hot-loader/patch",

@@ -9,25 +9,15 @@ const baseConfig = require("./webpack.config.base");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(baseConfig, {
-	target: "electron-renderer",
+	target: "web",
 	devtool: "cheap-module-source-map",
 	entry: { index: path.join(__dirname, "src", "index") },
+	output: {
+		libraryTarget: "var"
+	},
 	module: {
 		rules: [
-			{
-				test: /\.(scss|sass)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					"css-loader",
-					"sass-loader" // compiles Sass to CSS
-				],
-				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, "css-loader"],
-				exclude: /node_modules/
-			}
+
 		]
 	},
 	plugins: [
@@ -40,7 +30,7 @@ module.exports = merge(baseConfig, {
 			inject: false,
 			template: "./src/index.ejs",
 			appMountId: "root",
-			mobile: false,
+			mobile: true,
 			lang: "en-US",
 			title: "My App",
 			minify: {
