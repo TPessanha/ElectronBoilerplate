@@ -4,8 +4,7 @@
 	"jsRules": {},
 	"rules": {
 		"semicolon": true,
-		"object-literal-sort-keys": false,
-		"no-var-requires": false
+		"object-literal-sort-keys": false
 	},
 	"rulesDirectory": []
 }

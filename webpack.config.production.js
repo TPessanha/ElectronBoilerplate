@@ -9,35 +9,32 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require("./webpack.config.base");
 
 module.exports = merge(baseConfig, {
+	target: "electron-renderer",
 	devtool: "cheap-module-source-map",
-	//mode: "production",
 	entry: { index: path.join(__dirname, "src", "index") },
-
 	module: {
-		rules: [
-			// Common Image Formats
-			{
-				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-				use: "url-loader"
-			}
-		]
-	},
-	devServer: {
-		contentBase: path.resolve(__dirname),
-		compress: true,
-		port: 3000,
-		stats: "minimal"
+		rules: []
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: "./src/index.ejs",
 			appMountId: "root",
-			mobile: false,
+			mobile: true,
 			lang: "en-US",
-			title: "My App"
+			title: "My App",
+			minify: {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeRedundantAttributes: true,
+				useShortDoctype: true,
+				removeEmptyAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				keepClosingSlash: true,
+				minifyJS: true,
+				minifyCSS: true,
+				minifyURLs: true
+			}
 		})
-	],
-	// https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works
-	target: "electron-renderer"
+	]
 });

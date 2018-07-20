@@ -1,15 +1,18 @@
 {
-  "name": "mystartetkit",
-  "version": "0.0.0",
+  "name": "electron-boilerplate",
+  "version": "0.1.1",
   "description": "Electron boilterplate",
   "main": "./dist/app.min.js",
   "author": {
     "name": "Tomas Pessanha",
-    "email": "unknown@gmail.com",
-    "url": "https://github.com/test"
+    "url": "https://github.com/TPessanha"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "homepage": "https://www.google.pt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TPessanha/ElectronBoilerplate"
+  },
   "scripts": {
     "build-main": "webpack --config webpack.config.electron.js --progress --profile --colors",
     "build-renderer": "webpack --config webpack.config.production.js --progress --profile --colors",
@@ -27,7 +30,10 @@
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
     "test": "jest",
-    "gen-dts": "sass-dts ./src"
+    "gen-dts": "sass-dts ./src",
+    "lint:eslint": "eslint src/**/*.js*",
+    "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
+    "lint": "npm run lint:eslint && npm run lint:tslint"
   },
   "build": {
     "productName": "ElectronBoilerplate",
@@ -74,6 +80,7 @@
     "ajv": "^6.5.2",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",

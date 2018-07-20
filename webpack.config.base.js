@@ -20,7 +20,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.scss$/,
+				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
+				use: "url-loader"
+			},
+			{
+				test: /\.(scss|sass)$/,
 				use: [
 					process.env.NODE_ENV !== "production"
 						? "style-loader"
@@ -98,7 +102,8 @@ module.exports = {
 			filename: "[name].css",
 			chunkFilename: "[id].css"
 		})
-	]
+	],
+	externals: []
 	/* externals: {
 		react: "React",
 		"react-dom": "ReactDOM"

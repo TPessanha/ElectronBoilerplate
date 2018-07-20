@@ -23,10 +23,26 @@ module.exports = merge(baseConfig, {
 
 	output: {
 		filename: "index.js",
-		publicPath: `http://localhost:${port}/dist/`
+		publicPath: `http://localhost:${port}/dist/`,
+		libraryTarget: "var" //Allows browser viewing not sure if it should be var
 	},
 
-	module: {},
+	module: {
+		rules: [
+			{
+				test: /\.jsx?$/,
+				use: [
+					{
+						loader: "babel-loader",
+						options: {
+							presets: ["es2015", "react"]
+						}
+					}
+				],
+				exclude: /node_modules/
+			}
+		]
+	},
 	plugins: [
 		// https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
 		new webpack.HotModuleReplacementPlugin(),
@@ -46,12 +62,11 @@ module.exports = merge(baseConfig, {
 			inject: false,
 			template: "./src/index.ejs",
 			appMountId: "root",
-			mobile: false,
+			mobile: true,
 			lang: "en-US",
 			title: "My App"
 		})
-	],
+	]
 
 	// https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works
-	target: "electron-renderer"
 });

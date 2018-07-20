@@ -3,11 +3,10 @@
 		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"lib": ["dom", "es6", "dom.iterable", "scripthost"],
 
 		"strict": true,
 		"alwaysStrict": true,
-		"strictNullChecks": false,
+		"strictNullChecks": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
@@ -27,5 +26,5 @@
 		}
 	},
 	"include": ["src/**/*ts*"],
-	"exclude": ["node_modules", "dist"]
+	"exclude": ["node_modules", "dist", "release", "resources"]
 }

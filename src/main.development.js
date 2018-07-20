@@ -39,22 +39,16 @@ const installExtensions = () => {
 app.on("ready", () =>
 	installExtensions().then(() => {
 		mainWindow = new BrowserWindow({
-			//show: false,
 			width: 1024,
 			height: 728
 		});
 		const PORT = process.env.PORT || 3000;
 		mainWindow.loadURL(`http://localhost:${PORT}/dist/index.html`);
-		//mainWindow.loadURL(`file://${__dirname}/index.html`);
-		/*mainWindow.webContents.on("did-finish-load", () => {
-			mainWindow.show();
-			//mainWindow.focus();
-		});*/
 
 		mainWindow.on("closed", () => {
 			mainWindow = null;
 		});
-		console.log(process.env.NODE_ENV);
+
 		if (process.env.NODE_ENV === "development") {
 			mainWindow.openDevTools();
 			mainWindow.webContents.on("context-menu", (e, props) => {

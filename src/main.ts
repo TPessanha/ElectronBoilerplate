@@ -19,6 +19,9 @@ function createWindow() {
 	mainWindow.loadURL(url);
 
 	mainWindow.webContents.on("did-finish-load", () => {
+		if (!mainWindow) {
+			throw new Error('"mainWindow" is not defined');
+		}
 		mainWindow.show();
 		mainWindow.focus();
 	});
