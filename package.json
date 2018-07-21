@@ -39,6 +39,15 @@
   "build": {
     "productName": "ElectronBoilerplate",
     "appId": "tp.ElectronBoilerplate",
+    "files": [
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
     "dmg": {
       "contents": [
         {
@@ -54,15 +63,6 @@
         }
       ]
     },
-    "files": [
-      "dist/",
-      "node_modules/",
-      "package.json"
-    ],
-    "directories": {
-      "buildResources": "resources",
-      "output": "release"
-    },
     "win": {
       "target": "nsis"
     },
@@ -71,6 +71,9 @@
         "deb",
         "AppImage"
       ]
+    },
+    "mac": {
+      "category": "utility"
     }
   },
   "devDependencies": {
