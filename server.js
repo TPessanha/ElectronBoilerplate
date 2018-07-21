@@ -33,9 +33,9 @@ const server = app.listen(PORT, "localhost", serverError => {
 		return console.error(serverError);
 	}
 
-	const scriptToRun = process.argv[2].slice(2);
+	let scriptToRun = process.argv[2];
 	if (scriptToRun) {
-		spawn("npm", ["run", scriptToRun], {
+		spawn("npm", ["run", scriptToRun.slice(2)], {
 			shell: true,
 			env: process.env,
 			stdio: "inherit"
