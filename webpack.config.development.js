@@ -46,14 +46,29 @@ module.exports = merge(baseConfig, {
 				test: /\.(scss|sass)$/,
 				use: [
 					"style-loader",
-					"css-loader",
+					{
+						loader: "css-loader",
+						options: {
+							modules: true,
+							localIdentName: "[path][name]_[local]"
+						}
+					},
 					"sass-loader" // compiles Sass to CSS
 				],
 				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/,
-				use: ["style-loader", "css-loader"],
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							modules: true,
+							localIdentName: "[path][name]_[local]"
+						}
+					}
+				],
 				exclude: /node_modules/
 			}
 		]

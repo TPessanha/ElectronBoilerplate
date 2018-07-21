@@ -8,7 +8,7 @@ const path = require("path");
 module.exports = {
 	mode: process.env.NODE_ENV || "production",
 	resolve: {
-		extensions: [".scss", ".ts", ".tsx", ".json", ".js", ".jsx"],
+		extensions: [".ts", ".tsx", ".json", ".js", ".jsx"],
 		modules: [path.resolve(__dirname, "src"), "node_modules"]
 	},
 	output: {
@@ -18,6 +18,56 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			// WOFF Font
+			{
+				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						mimetype: "application/font-woff"
+					}
+				}
+			},
+			// WOFF2 Font
+			{
+				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						mimetype: "application/font-woff"
+					}
+				}
+			},
+			// TTF Font
+			{
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						mimetype: "application/octet-stream"
+					}
+				}
+			},
+			// EOT Font
+			{
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				use: "file-loader"
+			},
+			// SVG Font
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						mimetype: "image/svg+xml"
+					}
+				}
+			},
+			// Common Image Formats
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
 				use: "url-loader"

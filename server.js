@@ -19,9 +19,7 @@ const PORT = process.env.PORT || 3000;
 
 const wdm = webpackDevMiddleware(compiler, {
 	publicPath: config.output.publicPath,
-	stats: {
-		colors: true
-	}
+	stats: "minimal"
 });
 
 app.use(wdm);
@@ -33,7 +31,8 @@ const server = app.listen(PORT, "localhost", serverError => {
 		return console.error(serverError);
 	}
 
-	let scriptToRun = process.argv[2];
+	//TODO improve this
+	const scriptToRun = process.argv[2];
 	if (scriptToRun) {
 		spawn("npm", ["run", scriptToRun.slice(2)], {
 			shell: true,
@@ -45,6 +44,7 @@ const server = app.listen(PORT, "localhost", serverError => {
 	}
 
 	console.log(`Listening at http://localhost:${PORT}`);
+	console.log(`Page at http://localhost:${PORT}/dist/index.html`);
 });
 
 process.on("SIGTERM", () => {
