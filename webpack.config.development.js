@@ -58,18 +58,6 @@ module.exports = merge(baseConfig, {
 	module: {
 		rules: [
 			{
-				test: /\.jsx?$/,
-				use: [
-					{
-						loader: "babel-loader",
-						options: {
-							presets: ["env", "react"]
-						}
-					}
-				],
-				exclude: /node_modules/
-			},
-			{
 				test: /\.(scss|sass)$/,
 				use: [
 					"style-loader",
@@ -80,7 +68,7 @@ module.exports = merge(baseConfig, {
 							localIdentName: "[path][name]_[local]"
 						}
 					},
-					"sass-loader" // compiles Sass to CSS
+					"sass-loader"
 				],
 				exclude: /node_modules/
 			},

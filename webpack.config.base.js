@@ -18,7 +18,6 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			// WOFF Font
 			{
 				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
 				use: {
@@ -29,7 +28,6 @@ module.exports = {
 					}
 				}
 			},
-			// WOFF2 Font
 			{
 				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
 				use: {
@@ -40,7 +38,6 @@ module.exports = {
 					}
 				}
 			},
-			// TTF Font
 			{
 				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
 				use: {
@@ -51,12 +48,10 @@ module.exports = {
 					}
 				}
 			},
-			// EOT Font
 			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
 				use: "file-loader"
 			},
-			// SVG Font
 			{
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
 				use: {
@@ -67,7 +62,6 @@ module.exports = {
 					}
 				}
 			},
-			// Common Image Formats
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
 				use: "url-loader"
@@ -84,7 +78,7 @@ module.exports = {
 			},
 			{
 				test: /\.tsx?$/,
-				loader: "ts-loader",
+				loader: ["babel-loader", "ts-loader"],
 				exclude: /node_modules/
 			},
 			{
@@ -98,21 +92,13 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: "eslint-loader",
 				options: {
-					// eslint options (if necessary)
 					typeCheck: true,
 					emitErrors: true
 				}
 			},
 			{
 				test: /\.jsx?$/,
-				use: [
-					{
-						loader: "babel-loader",
-						options: {
-							presets: ["env", "react"]
-						}
-					}
-				],
+				use: ["babel-loader"],
 				exclude: /node_modules/
 			}
 		]
