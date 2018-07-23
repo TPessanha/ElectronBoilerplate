@@ -18,6 +18,7 @@ function createWindow() {
 	const url = `file://${__dirname}/index.html`;
 	mainWindow.loadURL(url);
 
+	gre.greetings("hello");
 	mainWindow.webContents.on("did-finish-load", () => {
 		if (!mainWindow) {
 			throw new Error('"mainWindow" is not defined');
