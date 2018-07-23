@@ -37,7 +37,7 @@
     "lint:eslint": "eslint src/**/*.js*",
     "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
     "lint": "npm-run-all --parallel lint:*",
-    "preversion": "npm run lint",
+    "preversion": "npm-run-all lint test",
     "version": "npm run clean && git add -A",
     "postversion": "git push && git push --tags"
   },
