@@ -36,7 +36,10 @@
     "generate:dts": "sass-dts ./src",
     "lint:eslint": "eslint src/**/*.js*",
     "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
-    "lint": "npm-run-all --parallel lint:*"
+    "lint": "npm-run-all --parallel lint:*",
+    "preversion": "npm run lint",
+    "version": "npm run clean && git add -A",
+    "postversion": "git push && git push --tags"
   },
   "babel": {
     "presets": [
