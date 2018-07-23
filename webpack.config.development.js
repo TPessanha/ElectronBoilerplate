@@ -8,7 +8,7 @@ const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { spawn } = require("child_process");
 
 const port = process.env.PORT || 3000;
 
@@ -16,9 +16,36 @@ module.exports = merge(baseConfig, {
 	devtool: "inline-source-map",
 	mode: process.env.NODE_ENV || "development",
 	//context: path.join(__dirname),
+
+	devServer: {
+		port: port,
+		stats: "minimal",
+		hot: true,
+		inline: true,
+		before() {
+			const argv = require("minimist")(process.argv.slice(2));
+			if (argv.startHot) {
+				spawn(
+					"npm",
+					[
+						"run",
+						argv.startHot === true ? "start:dev" : argv.startHot
+					],
+					{
+						shell: true,
+						env: process.env,
+						stdio: "inherit"
+					}
+				)
+					.on("close", code => process.exit(code))
+					.on("error", spawnError => console.error(spawnError));
+			}
+		}
+	},
 	entry: [
 		"react-hot-loader/patch",
-		`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr&reload=true`,
+		`webpack-dev-server/client?http://localhost:${port}`,
+		"webpack/hot/only-dev-server",
 		path.join(__dirname, "src", "index")
 	],
 

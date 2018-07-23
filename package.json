@@ -1,6 +1,6 @@
 {
   "name": "electron-boilerplate",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "Electron boilterplate",
   "main": "./dist/app.min.js",
   "author": {
@@ -8,24 +8,24 @@
     "url": "https://github.com/TPessanha"
   },
   "license": "MIT",
-  "homepage": "https://www.google.pt",
+  "homepage": "https://github.com/TPessanha/ElectronBoilerplate",
   "repository": {
     "type": "git",
     "url": "https://github.com/TPessanha/ElectronBoilerplate"
   },
   "scripts": {
-    "build:main": "cross-env NODE_ENV=production webpack --config webpack.config.electron.js --progress --profile --colors",
-    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
-    "build": " npm run build:main && npm run build:renderer",
-    "build:web": "cross-env NODE_ENV=production webpack --config webpack.config.production.web.js --progress --profile --colors",
+    "build:main": "cross-env NODE_ENV=production webpack --config webpack.config.electron.js --profile --colors",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --profile --colors",
+    "build": "npm-run-all --parallel build:main build:renderer",
+    "build:web": "cross-env NODE_ENV=production webpack --config webpack.config.production.web.js --profile --colors",
     "start": "electron ./dist/app.min.js",
     "build-start": "npm run clean && cross-env NODE_ENV=production npm run build && electron ./dist/app.min.js",
-    "clean": "npm run remove:dist && npm run remove:release",
+    "clean": "npm-run-all --parallel remove:*",
     "remove:dist": "rimraf ./dist",
     "remove:release": "rimraf ./release",
-    "dev": "npm run hot_server -- --start:hot",
-    "hot_server": "cross-env NODE_ENV=development node --max_old_space_size=2096 server.js",
-    "start:hot": "cross-env HOT=1 NODE_ENV=development electron ./src/main.development",
+    "dev": "cross-env NODE_ENV=development npm run start:dev_server -- --startHot start:dev",
+    "start:dev_server": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.development.js --profile --colors",
+    "start:dev": "electron ./src/main.development",
     "package": "npm run build && build --publish never",
     "package:win": "npm run build && build --win --x64",
     "package:linux": "npm run build && build --linux",
@@ -34,7 +34,7 @@
     "generate:dts": "sass-dts ./src",
     "lint:eslint": "eslint src/**/*.js*",
     "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
-    "lint": "npm run lint:eslint && npm run lint:tslint"
+    "lint": "npm-run-all --parallel lint:*"
   },
   "build": {
     "productName": "ElectronBoilerplate",
@@ -106,6 +106,7 @@
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
+    "npm-run-all": "^4.1.3",
     "prettier": "^1.13.7",
     "react-hot-loader": "^4.3.3",
     "redux-devtools": "^3.4.1",
@@ -124,8 +125,7 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-hot-middleware": "^2.22.2",
+    "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.1.3"
   },
   "dependencies": {
