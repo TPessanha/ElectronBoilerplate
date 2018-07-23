@@ -43,6 +43,13 @@ module.exports = merge(baseConfig, {
 			mobile: false,
 			lang: "en-US",
 			title: "My App",
+			meta: [
+				{
+					"http-equiv": "Content-Security-Policy",
+					content:
+						"default-src 'none'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self';"
+				}
+			],
 			minify: {
 				removeComments: true,
 				collapseWhitespace: true,
