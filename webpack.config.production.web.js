@@ -17,7 +17,20 @@ module.exports = merge(baseConfig, {
 	},
 	module: {
 		rules: [
-
+			{
+				test: /\.(scss|sass)$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					"sass-loader" // compiles Sass to CSS
+				],
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				use: [MiniCssExtractPlugin.loader, "css-loader"],
+				exclude: /node_modules/
+			}
 		]
 	},
 	plugins: [
@@ -33,6 +46,13 @@ module.exports = merge(baseConfig, {
 			mobile: true,
 			lang: "en-US",
 			title: "My App",
+			meta: [
+				{
+					"http-equiv": "Content-Security-Policy",
+					content:
+						"default-src 'none'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self';"
+				}
+			],
 			minify: {
 				removeComments: true,
 				collapseWhitespace: true,
