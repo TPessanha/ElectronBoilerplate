@@ -1,6 +1,6 @@
 {
   "name": "electron-boilerplate",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Electron boilterplate",
   "main": "./dist/app.min.js",
   "author": {
@@ -15,12 +15,12 @@
     "url": "https://github.com/TPessanha/ElectronBoilerplate"
   },
   "scripts": {
-    "build:main": "cross-env NODE_ENV=development webpack --config webpack.config.electron.js --profile --colors",
-    "build:renderer": "cross-env NODE_ENV=development webpack --config webpack.config.production.js --profile --colors",
+    "build:main": "cross-env NODE_ENV=production webpack --config webpack.config.electron.js --profile --colors",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --profile --colors",
     "build": "npm-run-all --parallel build:main build:renderer",
     "build:web": "cross-env NODE_ENV=production webpack --config webpack.config.production.web.js --profile --colors",
     "start": "electron ./dist/app.min.js",
-    "build-start": "npm run clean && cross-env NODE_ENV=production npm run build && electron ./dist/app.min.js",
+    "build-start": "cross-env NODE_ENV=production npm run build && electron ./dist/app.min.js",
     "clean": "npm-run-all --parallel remove:*",
     "remove:dist": "rimraf ./dist",
     "remove:release": "rimraf ./release",
@@ -32,6 +32,7 @@
     "package:linux": "npm run build && build --linux",
     "package:all": "npm run build && build -mwl",
     "test": "jest",
+    "test_coverage": "jest --coverage",
     "generate:dts": "sass-dts ./src",
     "lint:eslint": "eslint src/**/*.js*",
     "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
