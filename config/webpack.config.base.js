@@ -10,14 +10,15 @@ module.exports = {
 	mode: process.env.NODE_ENV || "production",
 	devtool: "source-map",
 	bail: true,
+	//stats: {  },
 	resolve: {
 		extensions: [".ts", ".tsx", ".json", ".js", ".jsx"],
 		modules: [appPaths.appNodeModules]
 	},
 	output: {
 		path: appPaths.appDist,
-		filename: "static/js/[name].js",
-		chunkFilename: "static/js/[id].chunk.js",
+		filename: "static/js/[name].[chunkhash:8].js",
+		chunkFilename: "static/js/[name].[chunkhash:8].chunk.js",
 		libraryTarget: "commonjs2"
 	},
 	module: {

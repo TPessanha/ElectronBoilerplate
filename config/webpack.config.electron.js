@@ -10,6 +10,9 @@ module.exports = merge(baseConfig, {
 	devtool: "source-map",
 	entry: { "app.min": appPaths.appSrcMain },
 	plugins: [],
-	output: {},
+	output: {
+		filename: "static/js/[name].js",
+		chunkFilename: "static/js/[id].chunk.js"
+	},
 	target: "electron-main"
 });

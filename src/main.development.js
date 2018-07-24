@@ -38,13 +38,12 @@ app.on("ready", () =>
 			height: 728
 		});
 		const PORT = parseInt(process.env.PORT, 10) || 3000;
-		mainWindow.loadURL(`http://localhost:${PORT}/dist/index.html`);
+		mainWindow.loadURL(`http://localhost:${PORT}`);
 
 		mainWindow.on("closed", () => {
 			mainWindow = null;
 		});
 
-		mainWindow.openDevTools();
 		mainWindow.webContents.on("context-menu", (e, props) => {
 			const { x, y } = props;
 

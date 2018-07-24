@@ -15,11 +15,10 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 module.exports = merge(baseConfig, {
 	devtool: "cheap-module-source-map",
 	mode: process.env.NODE_ENV || "development",
-	//context: path.join(__dirname),
 	devServer: {
 		port: port,
 		stats: "minimal",
-		hot: true,
+		host: "0.0.0.0",
 		inline: true,
 		before() {
 			const argv = require("minimist")(process.argv.slice(2));
@@ -36,21 +35,23 @@ module.exports = merge(baseConfig, {
 						stdio: "inherit"
 					}
 				)
-					.on("close", code => process.exit(code))
+					.on("close", code => {
+						if (argv.linkLife) process.exit(code);
+					})
 					.on("error", spawnError => console.error(spawnError));
 			}
 		}
 	},
 	entry: [
-		"react-hot-loader/patch",
-		`webpack-dev-server/client?http://localhost:${port}`,
-		"webpack/hot/only-dev-server",
+		//"react-hot-loader/patch",
+		//`webpack-dev-server/client?http://localhost:${port}`,
+		//"webpack/hot/only-dev-server",
 		appPaths.appSrcIndex
 	],
 
 	output: {
 		filename: "index.js",
-		publicPath: `http://localhost:${port}/dist/`,
+		//publicPath: `http://localhost:${port}/dist/`,
 		libraryTarget: "var" //Allows browser viewing not sure if it should be var
 	},
 
@@ -88,12 +89,9 @@ module.exports = merge(baseConfig, {
 		]
 	},
 	performance: {
-		hints: "warning"
+		hints: false
 	},
 	plugins: [
-		// https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
-		new webpack.HotModuleReplacementPlugin(),
-
 		new webpack.NoEmitOnErrorsPlugin(),
 
 		new webpack.LoaderOptionsPlugin({
@@ -102,13 +100,11 @@ module.exports = merge(baseConfig, {
 
 		new HtmlWebpackPlugin({
 			inject: false,
-			template: "./src/index.ejs",
+			template: appPaths.appHtmlTemplateEJS,
 			appMountId: "root",
 			mobile: true,
 			lang: "en-US",
 			title: "My App"
 		})
 	]
-
-	// https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works
 });
