@@ -4,11 +4,11 @@
 
 const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
-const path = require("path");
+const appPaths = require("./appPaths");
 
 module.exports = merge(baseConfig, {
 	devtool: "source-map",
-	entry: { "app.min": path.join(__dirname, "src", "main") },
+	entry: { "app.min": appPaths.appSrcMain },
 	plugins: [],
 	output: {},
 	target: "electron-main"

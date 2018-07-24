@@ -1,26 +1,25 @@
 /**
  * Build config for electron 'Renderer Process' file
  */
-
-const path = require("path");
+const appPaths = require("./appPaths");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require("./webpack.config.base");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(baseConfig, {
-	target: "electron-renderer",
-	devtool: "cheap-module-source-map",
-	entry: { index: path.join(__dirname, "src", "index") },
+	target: "web",
+	entry: { index: appPaths.appSrcIndex },
+	output: {
+		filename: "static/js/[name].[chunkhash:8].js",
+		chunkFilename: "static/js/[name].[chunkhash:8].chunk.js",
+		libraryTarget: "var"
+	},
 	module: {
 		rules: [
 			{
 				test: /\.(scss|sass)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					"css-loader",
-					"sass-loader" // compiles Sass to CSS
-				],
+				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 				exclude: /node_modules/
 			},
 			{
@@ -32,15 +31,15 @@ module.exports = merge(baseConfig, {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: "[name].css",
-			chunkFilename: "[id].css"
+			filename: "static/css/[name].[contenthash:8].css",
+			chunkFilename: "static/css/[id].[contenthash:8].css"
 		}),
 
 		new HtmlWebpackPlugin({
 			inject: false,
-			template: "./src/index.ejs",
+			template: appPaths.appHtmlTemplateEJS,
 			appMountId: "root",
-			mobile: false,
+			mobile: true,
 			lang: "en-US",
 			title: "My App",
 			meta: [

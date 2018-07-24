@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
-// import * as path from "path";
+import * as path from "path";
+import * as url from "url";
 import * as gre from "./test";
 
 let mainWindow: BrowserWindow | null;
@@ -15,8 +16,14 @@ function createWindow() {
 	// tslint:disable-next-line:no-console
 	console.log(c);
 
-	const url = `file://${__dirname}/index.html`;
-	mainWindow.loadURL(url);
+	const indexPath = url.format({
+		pathname: path.resolve("dist", "index.html"),
+		protocol: "file" + ":",
+		slashes: true
+	});
+	// tslint:disable-next-line:no-console
+	console.log(indexPath);
+	mainWindow.loadURL(indexPath);
 
 	gre.greetings("hello");
 	mainWindow.webContents.on("did-finish-load", () => {

@@ -3,17 +3,21 @@
  */
 
 const path = require("path");
+const appPaths = require("./appPaths");
 //const { dependencies: externals } = require("./app/package.json");
 
 module.exports = {
 	mode: process.env.NODE_ENV || "production",
+	devtool: "source-map",
+	bail: true,
 	resolve: {
 		extensions: [".ts", ".tsx", ".json", ".js", ".jsx"],
-		modules: [path.resolve(__dirname, "src"), "node_modules"]
+		modules: [appPaths.appNodeModules]
 	},
 	output: {
-		path: path.resolve("./dist"),
-		filename: "[name].js",
+		path: appPaths.appDist,
+		filename: "static/js/[name].js",
+		chunkFilename: "static/js/[id].chunk.js",
 		libraryTarget: "commonjs2"
 	},
 	module: {
@@ -50,7 +54,12 @@ module.exports = {
 			},
 			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-				use: "file-loader"
+				use: {
+					loader: "file-loader",
+					options: {
+						name: "static/media/[name].[hash:8].[ext]"
+					}
+				}
 			},
 			{
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -58,13 +67,20 @@ module.exports = {
 					loader: "url-loader",
 					options: {
 						limit: 10000,
-						mimetype: "image/svg+xml"
+						mimetype: "image/svg+xml",
+						name: "static/media/[name].[hash:8].[ext]"
 					}
 				}
 			},
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-				use: "url-loader"
+				use: {
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						name: "static/media/[name].[hash:8].[ext]"
+					}
+				}
 			},
 			{
 				test: /\.ts$/,
@@ -102,6 +118,9 @@ module.exports = {
 				exclude: /node_modules/
 			}
 		]
+	},
+	performance: {
+		hints: "error"
 	},
 	node: {
 		__dirname: false,

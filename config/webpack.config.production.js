@@ -2,19 +2,15 @@
  * Build config for electron 'Renderer Process' file
  */
 
-const path = require("path");
+const appPaths = require("./appPaths");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require("./webpack.config.base");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(baseConfig, {
-	target: "web",
-	devtool: "cheap-module-source-map",
-	entry: { index: path.join(__dirname, "src", "index") },
-	output: {
-		libraryTarget: "var"
-	},
+	target: "electron-renderer",
+	entry: { index: appPaths.appSrcIndex },
 	module: {
 		rules: [
 			{
@@ -35,15 +31,15 @@ module.exports = merge(baseConfig, {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: "[name].css",
-			chunkFilename: "[id].css"
+			filename: "static/css/[name].[contenthash:8].css",
+			chunkFilename: "static/css/[id].[contenthash:8].css"
 		}),
 
 		new HtmlWebpackPlugin({
 			inject: false,
-			template: "./src/index.ejs",
+			template: appPaths.appHtmlTemplateEJS,
 			appMountId: "root",
-			mobile: true,
+			mobile: false,
 			lang: "en-US",
 			title: "My App",
 			meta: [

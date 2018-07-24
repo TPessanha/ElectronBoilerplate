@@ -7,16 +7,15 @@ const webpack = require("webpack");
 const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const appPaths = require("./appPaths");
 const { spawn } = require("child_process");
 
-const port = process.env.PORT || 3000;
+const port = parseInt(process.env.PORT, 10) || 3000;
 
 module.exports = merge(baseConfig, {
-	devtool: "inline-source-map",
+	devtool: "cheap-module-source-map",
 	mode: process.env.NODE_ENV || "development",
 	//context: path.join(__dirname),
-
 	devServer: {
 		port: port,
 		stats: "minimal",
@@ -46,7 +45,7 @@ module.exports = merge(baseConfig, {
 		"react-hot-loader/patch",
 		`webpack-dev-server/client?http://localhost:${port}`,
 		"webpack/hot/only-dev-server",
-		path.join(__dirname, "src", "index")
+		appPaths.appSrcIndex
 	],
 
 	output: {
@@ -88,16 +87,14 @@ module.exports = merge(baseConfig, {
 			}
 		]
 	},
+	performance: {
+		hints: "warning"
+	},
 	plugins: [
 		// https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
 		new webpack.HotModuleReplacementPlugin(),
 
 		new webpack.NoEmitOnErrorsPlugin(),
-
-		// NODE_ENV should be production so that modules do not perform certain development checks
-		new webpack.DefinePlugin({
-			"process.env.NODE_ENV": JSON.stringify("development")
-		}),
 
 		new webpack.LoaderOptionsPlugin({
 			debug: true

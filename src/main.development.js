@@ -37,7 +37,7 @@ app.on("ready", () =>
 			width: 1024,
 			height: 728
 		});
-		const PORT = process.env.PORT || 3000;
+		const PORT = parseInt(process.env.PORT, 10) || 3000;
 		mainWindow.loadURL(`http://localhost:${PORT}/dist/index.html`);
 
 		mainWindow.on("closed", () => {
