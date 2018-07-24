@@ -2,7 +2,7 @@
   "name": "electron-boilerplate",
   "version": "0.5.0",
   "description": "Electron boilterplate",
-  "main": "./dist/static/app.min.js",
+  "main": "./dist/static/js/app.min.js",
   "author": {
     "name": "Tomas Pessanha",
     "email": "temp@temp.com",
@@ -66,6 +66,7 @@
     "appId": "tp.ElectronBoilerplate",
     "files": [
       "dist/",
+      "dist/static/",
       "node_modules/",
       "package.json"
     ],

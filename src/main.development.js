@@ -5,10 +5,10 @@ let template;
 let mainWindow = null;
 
 require("electron-debug")(); // eslint-disable-line global-require
-const path = require("path"); // eslint-disable-line
+/*const path = require("path"); // eslint-disable-line
 const p = path.join(__dirname, "..", "dist", "node_modules"); // eslint-disable-line
 require("module").globalPaths.push(p); // eslint-disable-line
-
+ */
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") app.quit();
 });
