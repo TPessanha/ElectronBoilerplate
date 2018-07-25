@@ -32,5 +32,3 @@ test_script:
 
 # Don't actually build.
 build: off
-on:
-    appveyor_repo_tag: true
