@@ -37,7 +37,7 @@ module.exports = merge(baseConfig, {
 
 		new HtmlWebpackPlugin({
 			inject: false,
-			template: appPaths.appHtmlTemplateEJS,
+			template: appPaths.appSrcHtmlTemplateEjs,
 			appMountId: "root",
 			mobile: false,
 			lang: "en-US",
