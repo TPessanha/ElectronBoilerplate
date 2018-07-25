@@ -1,6 +1,6 @@
 {
   "name": "electron-boilerplate",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Electron boilterplate",
   "main": "./dist/static/js/app.min.js",
   "author": {
