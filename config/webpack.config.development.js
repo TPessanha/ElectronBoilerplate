@@ -9,7 +9,9 @@ const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const appPaths = require("./appPaths");
 const { spawn } = require("child_process");
+const ignoredFiles = require("react-dev-utils/ignoredFiles");
 
+const host = process.env.HOST || "0.0.0.0";
 const port = parseInt(process.env.PORT, 10) || 3000;
 
 module.exports = merge(baseConfig, {
@@ -18,8 +20,12 @@ module.exports = merge(baseConfig, {
 	devServer: {
 		port: port,
 		stats: "minimal",
-		host: "0.0.0.0",
+		host: host,
 		inline: true,
+		compress: true,
+		watchOptions: {
+			ignored: ignoredFiles(appPaths.appSrc)
+		},
 		before() {
 			const argv = require("minimist")(process.argv.slice(2));
 			if (argv.startHot) {
@@ -93,10 +99,6 @@ module.exports = merge(baseConfig, {
 	},
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin(),
-
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		}),
 
 		new HtmlWebpackPlugin({
 			inject: false,
