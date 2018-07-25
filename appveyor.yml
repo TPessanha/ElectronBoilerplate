@@ -1,0 +1,33 @@
+branches:
+  only:
+    - master
+
+cache:
+  - node_modules
+
+environment:
+  nodejs_version: "8"
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - node --version
+  - npm run lint
+  - npm run build
+  - npm run package:win
+  - npm run clean
+  - npm run build:web
+  - npm run test
+
+# Don't actually build.
+build: off
