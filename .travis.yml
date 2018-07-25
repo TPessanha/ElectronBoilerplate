@@ -3,7 +3,6 @@ sudo: false
 
 node_js:
 - "8"
-- "7"
 
 cache:
   yarn: false
@@ -14,6 +13,7 @@ script:
 - node --version
 - npm run lint
 - npm run build
+- npm run clean
 - npm run package:linux
 - npm run clean
 - npm run build:web

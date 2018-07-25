@@ -24,6 +24,7 @@ test_script:
   - node --version
   - npm run lint
   - npm run build
+  - npm run clean
   - npm run package:win
   - npm run clean
   - npm run build:web
@@ -31,3 +32,5 @@ test_script:
 
 # Don't actually build.
 build: off
+on:
+    appveyor_repo_tag: true
