@@ -16,7 +16,7 @@ export class Home extends React.Component<IHelloProps, {}> {
 	public render() {
 		return (
 			<h1 className={styles.test}>
-				Hello from {this.props.compiler} and {this.props.framework}!
+				Hellos from {this.props.compiler} and {this.props.framework}!
 			</h1>
 		);
 	}
