@@ -40,7 +40,7 @@
     "lint:tslint": "tslint -c tslint.json 'src/**/*.ts*'",
     "format:src": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|json|css|scss|sass)\"",
     "format:all": "prettier --write \"*/**/*.+(js|jsx|ts|tsx|json|css|scss|sass)\"",
-    "preversion": "npm-run-all --parallel format:all lint test",
+    "preversion": "npm-run-all format:all lint test",
     "version": "npm run clean && git add -A",
     "postversion": "git push && git push --tags"
   },
