@@ -1,6 +1,6 @@
 {
   "name": "electron-boilerplate",
-  "version": "0.6.4",
+  "version": "0.6.3",
   "description": "Electron boilterplate",
   "main": "./dist/static/js/app.min.js",
   "author": {
@@ -29,8 +29,8 @@
     "start:dev_server": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.development.js --hot --profile --colors",
     "start:dev": "cross-env electron ./src/main.development",
     "package": "npm run build && build --publish never",
-    "package:win": "npm run build && build --win --x64 -p onTag",
-    "package:linux": "npm run build && build --linux  -p onTag",
+    "package:win": "npm run build && build --win --x64",
+    "package:linux": "npm run build && build --linux",
     "package:all": "npm run build && build -mwl",
     "test": "jest",
     "test_coverage": "jest --coverage",
