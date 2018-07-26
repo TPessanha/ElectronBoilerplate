@@ -76,6 +76,38 @@
       "buildResources": "resources",
       "output": "release"
     },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "resources/build/icon.ico",
+      "signingHashAlgorithms": ["sha256"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "snap",
+        "AppImage"
+      ],
+      "icon": "icons",
+      "category": "Utility"
+    },
+    "snap": {
+      "confinement": "strict"
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
     "dmg": {
       "contents": [
         {
@@ -90,25 +122,6 @@
           "type": "file"
         }
       ]
-    },
-    "win": {
-      "target": "nsis"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    },
-    "linux": {
-      "target": [
-        "deb",
-        "AppImage"
-      ]
-    },
-    "mac": {
-      "category": "utility"
     }
   },
   "keywords": [

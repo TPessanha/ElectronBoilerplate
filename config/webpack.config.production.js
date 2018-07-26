@@ -39,7 +39,7 @@ module.exports = merge(baseConfig, {
 			inject: false,
 			template: appPaths.appSrcHtmlTemplateEjs,
 			appMountId: "root",
-			mobile: false,
+			mobile: true,
 			lang: "en-US",
 			title: "My App",
 			meta: [

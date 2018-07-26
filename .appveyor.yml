@@ -21,14 +21,14 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - node --version
   - npm run lint
-  - npm run build
-  - npm run clean
-  - npm run package:win
-  - npm run clean
-  - npm run build:web
   - npm run test
+  - npm run build
+  - npm run build:web
+  - npm run clean
 
 # Don't actually build.
 build: off
+
+after_test:
+  - npm run package:win

@@ -10,12 +10,11 @@ cache:
   - node_modules
 
 script:
-- node --version
 - npm run lint
-- npm run build
-- npm run clean
-- npm run package:linux
-- npm run clean
-- npm run build:web
 - npm run test
+- npm run build
+- npm run build:web
+- npm run clean
 
+after_success:
+- npm run package:linux
