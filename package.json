@@ -24,7 +24,7 @@
     "clean": "npm-run-all --parallel remove:*",
     "remove:dist": "rimraf ./dist",
     "remove:release": "rimraf ./release",
-    "remove:covarage": "rimraf ./covarage",
+    "remove:coverage": "rimraf ./coverage",
     "dev": "cross-env PORT=3000 NODE_ENV=development ELECTRON_DISABLE_SECURITY_WARNINGS=True npm run start:dev_server -- --startHot start:dev --linkLife'",
     "start:dev_server": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.development.js --hot --profile --colors",
     "start:dev": "cross-env electron ./src/main.development",
