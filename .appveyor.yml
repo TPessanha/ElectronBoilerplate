@@ -30,5 +30,5 @@ test_script:
 # Don't actually build.
 build: off
 
-after_test:
+on_success:
   - npm run package:win
