@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const appPaths = require("./appPaths");
 const { spawn } = require("child_process");
 const ignoredFiles = require("react-dev-utils/ignoredFiles");
+var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 const host = process.env.HOST || "0.0.0.0";
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -64,7 +65,7 @@ module.exports = merge(baseConfig, {
 	module: {
 		rules: [
 			{
-				test: /\.(scss|sass)$/,
+				test: /\.(scss|sass|css)$/,
 				use: [
 					"style-loader",
 					{
@@ -77,20 +78,6 @@ module.exports = merge(baseConfig, {
 					"sass-loader"
 				],
 				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: [
-					"style-loader",
-					{
-						loader: "css-loader",
-						options: {
-							modules: true,
-							localIdentName: "[path][name]_[local]"
-						}
-					}
-				],
-				exclude: /node_modules/
 			}
 		]
 	},
@@ -99,7 +86,7 @@ module.exports = merge(baseConfig, {
 	},
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin(),
-
+		new HardSourceWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: appPaths.appSrcHtmlTemplateEjs,

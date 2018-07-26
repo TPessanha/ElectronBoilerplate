@@ -40,7 +40,7 @@ module.exports = {
 	appDist: resolveApp("dist"),
 	appHtml: resolveApp("index.html"),
 	appPublic: resolveApp("public"),
-	appSrcHtmlTemplateEjs: resolveApp("public/indexTemplate.ejs"),
+	appSrcHtmlTemplateEjs: resolveApp("src/indexTemplate.ejs"),
 	appSrcIndex: resolveApp("src/index"),
 	appSrcMain: resolveApp("src/main"),
 	appPackageJson: resolveApp("package.json"),

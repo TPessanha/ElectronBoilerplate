@@ -14,20 +14,56 @@ module.exports = merge(baseConfig, {
 	module: {
 		rules: [
 			{
-				test: /\.(scss|sass)$/,
+				test: /\.(scss|sass|css)$/,
 				use: [
 					MiniCssExtractPlugin.loader,
-					"css-loader",
-					"sass-loader" // compiles Sass to CSS
+					{
+						loader: "css-loader",
+						options: {
+							minimize: true,
+							sourceMap: true
+						}
+					},
+					{
+						loader: "postcss-loader",
+						options: {
+							plugins: () => [require("autoprefixer")],
+							sourceMap: true
+						}
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: true
+						}
+					} // compiles Sass to CSS
 				],
-				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, "css-loader"],
 				exclude: /node_modules/
 			}
 		]
+	},
+	optimization: {
+		splitChunks: {
+			chunks: "all",
+			minSize: 30000,
+			maxSize: 250000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			automaticNameDelimiter: "~",
+			name: true,
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true
+				}
+			}
+		}
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
