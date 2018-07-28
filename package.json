@@ -26,7 +26,7 @@
     "remove:release": "rimraf ./release",
     "remove:coverage": "rimraf ./coverage",
     "dev": "cross-env PORT=3000 NODE_ENV=development ELECTRON_DISABLE_SECURITY_WARNINGS=True npm run start:dev_server -- --startHot start:dev --linkLife'",
-    "start:dev_server": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.development.js --hot --profile --colors",
+    "start:dev_server": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.development.js --hotOnly --profile --colors",
     "start:dev": "cross-env electron ./src/main.development",
     "package": "npm run build && build --publish onTag",
     "package:win": "npm run build && build --win --x64",
@@ -42,7 +42,8 @@
     "format:all": "prettier --write \"*/**/*.+(js|jsx|ts|tsx|json|css|scss|sass)\"",
     "preversion": "npm-run-all format:all lint test",
     "version": "npm run clean && git add -A",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "start2": "cross-env PORT=3000 NODE_ENV=development ELECTRON_DISABLE_SECURITY_WARNINGS=True node scripts/dev-server.js --startHot start:dev --linkLife"
   },
   "build": {
     "productName": "ElectronBoilerplate",

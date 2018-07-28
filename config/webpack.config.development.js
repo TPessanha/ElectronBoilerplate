@@ -9,52 +9,17 @@ const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const appPaths = require("./appPaths");
 const { spawn } = require("child_process");
-const ignoredFiles = require("react-dev-utils/ignoredFiles");
 var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
-
-const host = process.env.HOST || "0.0.0.0";
-const port = parseInt(process.env.PORT, 10) || 3000;
 
 module.exports = merge(baseConfig, {
 	devtool: "cheap-module-source-map",
 	mode: process.env.NODE_ENV || "development",
-	devServer: {
-		port: port,
-		stats: "minimal",
-		host: host,
-		inline: true,
-		compress: true,
-		watchOptions: {
-			ignored: ignoredFiles(appPaths.appSrc)
-		},
-		before() {
-			const argv = require("minimist")(process.argv.slice(2));
-			if (argv.startHot) {
-				spawn(
-					"npm",
-					[
-						"run",
-						argv.startHot === true ? "start:dev" : argv.startHot
-					],
-					{
-						shell: true,
-						env: process.env,
-						stdio: "inherit"
-					}
-				)
-					.on("close", code => {
-						if (argv.linkLife) process.exit(code);
-					})
-					.on("error", spawnError => console.error(spawnError));
-			}
-		}
-	},
-	entry: [
+	entry: {
 		//"react-hot-loader/patch",
 		//`webpack-dev-server/client?http://localhost:${port}`,
 		//"webpack/hot/only-dev-server",
-		appPaths.appSrcIndex
-	],
+		index: appPaths.appSrcIndex
+	},
 
 	output: {
 		filename: "index.js",
@@ -85,6 +50,7 @@ module.exports = merge(baseConfig, {
 		hints: false
 	},
 	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new HardSourceWebpackPlugin(),
 		new HtmlWebpackPlugin({
