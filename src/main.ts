@@ -26,6 +26,7 @@ function createWindow() {
 	mainWindow.loadURL(indexPath);
 
 	gre.greetings("hello");
+	gre.timeout(5);
 	mainWindow.webContents.on("did-finish-load", () => {
 		if (!mainWindow) {
 			throw new Error('"mainWindow" is not defined');
