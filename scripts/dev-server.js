@@ -24,7 +24,10 @@ const options = {
 	hot: true,
 	compress: true,
 	watchOptions: {
-		ignored: ignoredFiles(appPaths.appNodeModules, appPaths.appSrc)
+		ignored: [
+			ignoredFiles(appPaths.appNodeModules),
+			ignoredFiles(appPaths.appSrc)
+		]
 	}
 };
 
