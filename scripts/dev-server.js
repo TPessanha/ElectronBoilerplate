@@ -1,17 +1,18 @@
-const webpackDevServer = require("webpack-dev-server");
+const WebpackDevServer = require("webpack-dev-server");
 const webpack = require("webpack");
 const config = require("../config/webpack.config.development");
 
-const ignoredFiles = require("react-dev-utils/ignoredFiles");
+const fs = require("fs");
 const appPaths = require("../config/appPaths");
 const chalk = require("chalk");
 const {
 	choosePort,
 	createCompiler,
-	prepareProxy,
 	prepareUrls
 } = require("react-dev-utils/WebpackDevServerUtils");
 const { spawn } = require("child_process");
+
+const useYarn = fs.existsSync(appPaths.yarnLockFile);
 
 const HOST = process.env.HOST || "0.0.0.0";
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -24,16 +25,12 @@ const options = {
 	hot: true,
 	compress: true,
 	watchOptions: {
-		ignored: [
-			ignoredFiles(appPaths.appNodeModules),
-			ignoredFiles(appPaths.appSrc)
-		]
+		ignored: ["node_modules", "src"]
 	}
 };
 
-webpackDevServer.addDevServerEntrypoints(config, options);
-const compiler = webpack(config);
-const devServer = new webpackDevServer(compiler, options);
+//const compiler = webpack(config);
+//const devServer = new webpackDevServer(compiler, options);
 
 choosePort(HOST, DEFAULT_PORT)
 	.then(port => {
@@ -42,6 +39,22 @@ choosePort(HOST, DEFAULT_PORT)
 			return;
 		}
 		process.env.PORT = port;
+
+		const protocol = process.env.HTTPS === "true" ? "https" : "http";
+		const appName = require(appPaths.appPackageJson).name;
+		const urls = prepareUrls(protocol, HOST, port);
+
+		WebpackDevServer.addDevServerEntrypoints(config, options);
+		// Create a webpack compiler that is configured with custom messages.
+		const compiler = createCompiler(
+			webpack,
+			config,
+			appName,
+			urls,
+			useYarn
+		);
+		const devServer = new WebpackDevServer(compiler, options);
+
 		// Launch WebpackDevServer.
 		devServer.listen(port, HOST, err => {
 			if (err) {

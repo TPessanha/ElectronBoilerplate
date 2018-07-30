@@ -82,7 +82,7 @@ module.exports = merge(baseConfig, {
 				{
 					"http-equiv": "Content-Security-Policy",
 					content:
-						"default-src 'none'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self';"
+						"default-src 'none'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; font-src 'self';"
 				}
 			],
 			minify: {
