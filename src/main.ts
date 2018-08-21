@@ -12,9 +12,9 @@ function createWindow() {
 		width: 800
 	});
 	// mainWindow.webContents.openDevTools();
-	//const c = gre.greetings("DELETED THIS ONLY HERE FOR TESTING");
+	// const c = gre.greetings("DELETED THIS ONLY HERE FOR TESTING");
 	// tslint:disable-next-line:no-console
-	//console.log(c);
+	// console.log(c);
 
 	const indexPath = url.format({
 		pathname: path.join(__dirname, "../", "../", "index.html"),
@@ -22,7 +22,7 @@ function createWindow() {
 		slashes: true
 	});
 	// tslint:disable-next-line:no-console
-	//console.log(indexPath);
+	// console.log(indexPath);
 	mainWindow.loadURL(indexPath);
 
 	gre.greetings("hello");
