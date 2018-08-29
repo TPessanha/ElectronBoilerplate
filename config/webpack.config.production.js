@@ -46,7 +46,7 @@ module.exports = merge(baseConfig, {
 		splitChunks: {
 			chunks: "all",
 			minSize: 30000,
-			maxSize: 250000,
+			maxSize: 240000,
 			minChunks: 1,
 			maxAsyncRequests: 5,
 			maxInitialRequests: 3,

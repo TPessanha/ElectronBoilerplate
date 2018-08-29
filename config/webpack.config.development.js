@@ -8,8 +8,7 @@ const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const appPaths = require("./appPaths");
-const { spawn } = require("child_process");
-var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 module.exports = merge(baseConfig, {
 	devtool: "cheap-module-source-map",

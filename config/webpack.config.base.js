@@ -2,7 +2,6 @@
  * Base webpack config used across other specific configs
  */
 
-const path = require("path");
 const appPaths = require("./appPaths");
 //const { dependencies: externals } = require("./app/package.json");
 
