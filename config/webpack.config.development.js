@@ -26,27 +26,9 @@ module.exports = merge(baseConfig, {
 		libraryTarget: "var" //Allows browser viewing not sure if it should be var
 	},
 
-	module: {
-		rules: [
-			{
-				test: /\.(scss|sass|css)$/,
-				use: [
-					"style-loader",
-					{
-						loader: "css-loader",
-						options: {
-							modules: true,
-							localIdentName: "[path][name]_[local]"
-						}
-					},
-					"sass-loader"
-				],
-				exclude: /node_modules/
-			}
-		]
-	},
+	module: {},
 	performance: {
-		hints: false
+		hints: "warning"
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),

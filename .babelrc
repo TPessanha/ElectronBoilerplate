@@ -2,6 +2,7 @@
 	"presets": ["env", "react"],
 	"env": {
 		"production": {
+			"plugins": ["lodash"],
 			"presets": ["react-optimize"]
 		},
 		"development": {

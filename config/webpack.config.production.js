@@ -5,48 +5,18 @@
 const appPaths = require("./appPaths");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
 const baseConfig = require("./webpack.config.base");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
 	entry: { index: appPaths.appSrcIndex },
-	module: {
-		rules: [
-			{
-				test: /\.(scss|sass|css)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					{
-						loader: "css-loader",
-						options: {
-							minimize: true,
-							sourceMap: true
-						}
-					},
-					{
-						loader: "postcss-loader",
-						options: {
-							plugins: () => [require("autoprefixer")],
-							sourceMap: true
-						}
-					},
-					{
-						loader: "sass-loader",
-						options: {
-							sourceMap: true
-						}
-					} // compiles Sass to CSS
-				],
-				exclude: /node_modules/
-			}
-		]
-	},
+	module: {},
 	optimization: {
 		splitChunks: {
 			chunks: "all",
 			minSize: 30000,
-			maxSize: 240000,
+			maxSize: 140000,
 			minChunks: 1,
 			maxAsyncRequests: 5,
 			maxInitialRequests: 3,
@@ -66,9 +36,8 @@ module.exports = merge(baseConfig, {
 		}
 	},
 	plugins: [
-		new MiniCssExtractPlugin({
-			filename: "static/css/[name].[contenthash:8].css",
-			chunkFilename: "static/css/[id].[contenthash:8].css"
+		new ManifestPlugin({
+			fileName: "asset-manifest.json"
 		}),
 
 		new HtmlWebpackPlugin({
