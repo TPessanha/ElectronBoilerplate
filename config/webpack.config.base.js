@@ -91,24 +91,37 @@ module.exports = {
 						}
 					},
 					{
-						test: /\.tsx?$/,
-						loader: ["babel-loader", "ts-loader"],
-						exclude: /node_modules/
-					},
-					{
 						test: /\.json$/,
 						loader: "json-loader",
 						exclude: /node_modules/
 					},
-
+					{
+						test: /\.tsx?$/,
+						use: [
+							{
+								loader: "babel-loader",
+								options: {
+									cacheDirectory: true
+								}
+							},
+							"ts-loader"
+						],
+						exclude: /node_modules/
+					},
 					{
 						test: /\.jsx?$/,
-						use: ["babel-loader"],
+						use: {
+							loader: "babel-loader",
+							options: {
+								cacheDirectory: true
+							}
+						},
 						exclude: /node_modules/
 					},
 					{
 						test: /\.(scss|sass|css|less)$/,
 						use: [
+							// Ceates a separate CSS file
 							MiniCssExtractPlugin.loader,
 							{
 								loader: "css-loader",
@@ -125,11 +138,12 @@ module.exports = {
 								}
 							},
 							{
+								// Turns Sass into CSS
 								loader: "sass-loader",
 								options: {
 									sourceMap: true
 								}
-							} // compiles Sass to CSS
+							}
 						],
 						exclude: /node_modules/
 					},
@@ -159,7 +173,9 @@ module.exports = {
 	performance: {
 		hints: "error",
 		assetFilter: function(assetFilename) {
-			return assetFilename.endsWith(".js");
+			return (
+				assetFilename.endsWith(".js") || assetFilename.endsWith(".css")
+			);
 		}
 	},
 	node: {
@@ -171,11 +187,5 @@ module.exports = {
 			filename: "static/css/[name].[contenthash:8].css",
 			chunkFilename: "static/css/[id].[contenthash:8].css"
 		})
-	],
-	externals: { react: "React" }
-	/* externals: {
-		react: "React",
-		"react-dom": "ReactDOM"
-	} */
-	//externals: Object.keys(externals || {})
+	]
 };

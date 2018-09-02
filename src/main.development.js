@@ -4,17 +4,15 @@ let menu;
 let template;
 let mainWindow = null;
 
-require("electron-debug")(); // eslint-disable-line global-require
-/*const path = require("path"); // eslint-disable-line
-const p = path.join(__dirname, "..", "dist", "node_modules"); // eslint-disable-line
-require("module").globalPaths.push(p); // eslint-disable-line
- */
+require("electron-debug")();
+
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") app.quit();
 });
 
+//Install REACT_DEVELOPER_TOOLS and REDUX_DEVTOOLS in chrome developer tools
 const installExtensions = () => {
-	const installer = require("electron-devtools-installer"); // eslint-disable-line global-require
+	const installer = require("electron-devtools-installer");
 
 	const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
 	const forceDownload = !!process.env.UPGRADE_EXTENSIONS;

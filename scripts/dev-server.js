@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const WebpackDevServer = require("webpack-dev-server");
 const webpack = require("webpack");
 const config = require("../config/webpack.config.development");

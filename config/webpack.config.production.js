@@ -8,6 +8,7 @@ const baseConfig = require("./webpack.config.base");
 // Plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
@@ -34,7 +35,14 @@ module.exports = merge(baseConfig, {
 					reuseExistingChunk: true
 				}
 			}
-		}
+		},
+		minimizer: [
+			new UglifyJSPlugin({
+				parallel: true,
+				sourceMap: true,
+				cache: true
+			})
+		]
 	},
 	plugins: [
 		new ManifestPlugin({
