@@ -1,5 +1,5 @@
 import assign from "lodash-es/assign";
-import * as React from "react";
+import React from "react";
 // import * as styles from "./Home.scss";
 // tslint:disable-next-line:no-var-requires
 // const styles = require<any>("./Home.css");

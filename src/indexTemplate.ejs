@@ -9,10 +9,10 @@ htmlWebpackPlugin.options.scripts = htmlWebpackPlugin.options.scripts || []
   <head>
     <meta charset="utf-8">
 	<meta content="ie=edge" http-equiv="x-ua-compatible"><%
-	
+
     if (htmlWebpackPlugin.options.baseHref) { %>
     <base href="<%= htmlWebpackPlugin.options.baseHref %>"><%
-    } %><% 
+    } %><%
     if (Array.isArray(htmlWebpackPlugin.options.meta)) { %><%
       for (item of htmlWebpackPlugin.options.meta) { %>
     <meta<% for (key in item) { %> <%= key %>="<%= item[key] %>"<% } %>><%
@@ -50,7 +50,10 @@ htmlWebpackPlugin.options.scripts = htmlWebpackPlugin.options.scripts || []
     <%= htmlWebpackPlugin.options.headHtmlSnippet %><%
     } %>
   </head>
-  <body><%
+  <body>
+	<noscript>
+		You need to enable JavaScript to run this app.
+	</noscript><%
     if (htmlWebpackPlugin.options.unsupportedBrowser) { %>
     <style>.unsupported-browser { display: none; }</style>
     <div class="unsupported-browser">

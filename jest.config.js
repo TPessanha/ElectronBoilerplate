@@ -21,15 +21,13 @@ module.exports = {
 	// collectCoverage: false,
 
 	// An array of glob patterns indicating a set of files for which coverage information should be collected
-	// collectCoverageFrom: null,
+	collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}"],
 
 	// The directory where Jest should output its coverage files
 	coverageDirectory: "coverage",
 
 	// An array of regexp pattern strings used to skip coverage collection
-	// coveragePathIgnorePatterns: [
-	//   "\\\\node_modules\\\\"
-	// ],
+	coveragePathIgnorePatterns: ["^.+\\.(d|development).(js|jsx|ts|tsx|mjs)$"],
 
 	// A list of reporter names that Jest uses when writing coverage reports
 	// coverageReporters: [
@@ -57,7 +55,8 @@ module.exports = {
 	// A set of global variables that need to be available in all test environments
 	globals: {
 		"ts-jest": {
-			tsConfigFile: "tsconfig.json"
+			tsConfigFile: "tsconfig.json",
+			useBabelrc: true
 		}
 	},
 
@@ -67,15 +66,15 @@ module.exports = {
 	// ],
 
 	// An array of file extensions your modules use
-	moduleFileExtensions: ["ts", "tsx", "js"],
+	moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
 
 	// A map from regular expressions to module names that allow to stub out resources with a single module
 	// moduleNameMapper: {},
-	moduleNameMapper: {
-		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-			"<rootDir>/__mocks__/fileMock.js",
-		"\\.(css|sass|scss)$": "identity-obj-proxy"
-	},
+	// moduleNameMapper: {
+	// 	"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+	// 		"<rootDir>/config/jest/fileTransform.js",
+	// 	"\\.(css|sass|scss|less)$": "identity-obj-proxy"
+	// },
 
 	// An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
 	// modulePathIgnorePatterns: [],
@@ -137,12 +136,12 @@ module.exports = {
 	// testLocationInResults: false,
 
 	// The glob patterns Jest uses to detect test files
-	testMatch: ["**/__tests__/*.+(ts|tsx|js)"],
+	testMatch: ["**/__tests__/*.+(ts|tsx|jsx,js)"],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-	// testPathIgnorePatterns: [
-	//   "\\\\node_modules\\\\"
-	// ],
+	testPathIgnorePatterns: [
+		"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx|mjs)$"
+	],
 
 	// The regexp pattern Jest uses to detect test files
 	// testRegex: "",
@@ -161,13 +160,16 @@ module.exports = {
 
 	// A map from regular expressions to paths to transformers
 	transform: {
-		"^.+\\.(ts|tsx)$": "ts-jest"
-	}
+		"^.+\\.(j|t)sx?$": "ts-jest",
+		//"^.+\\.(ts|tsx)$": "ts-jest",
+		//"^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+		"^.+\\.(css|sass|scss|less)$": "<rootDir>/config/jest/cssTransform.js",
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+			"<rootDir>/config/jest/fileTransform.js"
+	},
 
 	// An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-	// transformIgnorePatterns: [
-	//   "\\\\node_modules\\\\"
-	// ],
+	transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es/.*)"]
 
 	// An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
 	// unmockedModulePathPatterns: undefined,
