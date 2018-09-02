@@ -18,7 +18,7 @@ function createWindow() {
 
 	const indexPath = url.format({
 		pathname: path.join(__dirname, "../", "../", "index.html"),
-		protocol: "file" + ":",
+		protocol: "file:",
 		slashes: true
 	});
 	// tslint:disable-next-line:no-console

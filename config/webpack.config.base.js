@@ -24,15 +24,27 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			//Run ESlint
+			//Run lints
 			{
-				test: /\.ts$/,
+				test: /\.(ts|tsx)$/,
 				enforce: "pre",
 				loader: "tslint-loader",
 				options: {
 					typeCheck: true,
 					emitErrors: true
 				},
+				include: appPaths.appSrc,
+				exclude: /node_modules/
+			},
+			{
+				test: /\.(js|jsx)$/,
+				enforce: "pre",
+				loader: "eslint-loader",
+				options: {
+					typeCheck: true,
+					emitErrors: true
+				},
+				include: appPaths.appSrc,
 				exclude: /node_modules/
 			},
 			{
@@ -88,16 +100,7 @@ module.exports = {
 						loader: "json-loader",
 						exclude: /node_modules/
 					},
-					{
-						test: /\.js$/,
-						enforce: "pre",
-						exclude: /node_modules/,
-						loader: "eslint-loader",
-						options: {
-							typeCheck: true,
-							emitErrors: true
-						}
-					},
+
 					{
 						test: /\.jsx?$/,
 						use: ["babel-loader"],
@@ -131,13 +134,20 @@ module.exports = {
 						exclude: /node_modules/
 					},
 					//HAS TO BE LAST
+					// "file" loader makes sure those assets get served by WebpackDevServer.
+					// When you `import` an asset, you get its (virtual) filename.
+					// In production, they would get copied to the `build` folder.
+					// This loader doesn't use a "test" so it will catch all modules
+					// that fall through the other loaders.
 					{
 						loader: "file-loader",
 						// Exclude `js` files to keep "css" loader working as it injects
 						// it's runtime that would otherwise processed through "file" loader.
 						// Also exclude `html` and `json` extensions so they get processed
 						// by webpacks internal loaders.
-						exclude: [/\.(js|jsx|ts|tsx|mjs|html|json|ejs|scss|less)$/],
+						exclude: [
+							/\.(js|jsx|ts|tsx|mjs|html|json|ejs|scss|less)$/
+						],
 						options: {
 							name: "static/media/[name].[hash:8].[ext]"
 						}
@@ -162,7 +172,7 @@ module.exports = {
 			chunkFilename: "static/css/[id].[contenthash:8].css"
 		})
 	],
-	externals: []
+	externals: { react: "React" }
 	/* externals: {
 		react: "React",
 		"react-dom": "ReactDOM"

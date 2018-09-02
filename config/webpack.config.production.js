@@ -4,9 +4,10 @@
 
 const appPaths = require("./appPaths");
 const merge = require("webpack-merge");
+const baseConfig = require("./webpack.config.base");
+// Plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
-const baseConfig = require("./webpack.config.base");
 
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
