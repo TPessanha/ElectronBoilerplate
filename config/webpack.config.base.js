@@ -4,7 +4,6 @@
 
 const appPaths = require("./appPaths");
 // Plugins
-const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 //const { dependencies: externals } = require("./app/package.json");
@@ -26,29 +25,6 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			//Run lints
-			{
-				test: /\.(ts|tsx)$/,
-				enforce: "pre",
-				loader: "tslint-loader",
-				options: {
-					typeCheck: true,
-					emitErrors: true
-				},
-				include: appPaths.appSrc,
-				exclude: /node_modules/
-			},
-			{
-				test: /\.(js|jsx)$/,
-				enforce: "pre",
-				loader: "eslint-loader",
-				options: {
-					typeCheck: true,
-					emitErrors: true
-				},
-				include: appPaths.appSrc,
-				exclude: /node_modules/
-			},
 			{
 				oneOf: [
 					{
@@ -100,24 +76,22 @@ module.exports = {
 					{
 						test: /\.tsx?$/,
 						use: [
+							"babel-loader",
 							{
-								loader: "babel-loader",
+								loader: "ts-loader",
 								options: {
-									cacheDirectory: true
+									transpileOnly: true,
+									compilerOptions: {
+										noEmit: false
+									}
 								}
-							},
-							"ts-loader"
+							}
 						],
 						exclude: /node_modules/
 					},
 					{
 						test: /\.jsx?$/,
-						use: {
-							loader: "babel-loader",
-							options: {
-								cacheDirectory: true
-							}
-						},
+						use: ["babel-loader"],
 						exclude: /node_modules/
 					},
 					{
@@ -128,7 +102,10 @@ module.exports = {
 							{
 								loader: "css-loader",
 								options: {
-									minimize: true,
+									minimize:
+										process.env.NODE_ENV === "production"
+											? true
+											: false,
 									sourceMap: true
 								}
 							},
@@ -162,7 +139,7 @@ module.exports = {
 						// Also exclude `html` and `json` extensions so they get processed
 						// by webpacks internal loaders.
 						exclude: [
-							/\.(js|jsx|ts|tsx|mjs|html|json|ejs|scss|less)$/
+							/\.(js|jsx|ts|tsx|mjs|html|json|ejs|scss|less|sass|css)$/
 						],
 						options: {
 							name: "static/media/[name].[hash:8].[ext]"
@@ -188,7 +165,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "static/css/[name].[contenthash:8].css",
 			chunkFilename: "static/css/[id].[contenthash:8].css"
-		}),
-		new HardSourceWebpackPlugin()
+		})
 	]
 };

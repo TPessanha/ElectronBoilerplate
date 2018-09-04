@@ -15,7 +15,32 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
 	entry: { index: appPaths.appSrcIndex },
-	module: {},
+	module: {
+		rules: [
+			{
+				test: /\.(ts|tsx)$/,
+				enforce: "pre",
+				loader: "tslint-loader",
+				options: {
+					typeCheck: true,
+					emitErrors: true
+				},
+				include: appPaths.appSrc,
+				exclude: /node_modules/
+			},
+			{
+				test: /\.(js|jsx)$/,
+				enforce: "pre",
+				loader: "eslint-loader",
+				options: {
+					typeCheck: true,
+					emitErrors: true
+				},
+				include: appPaths.appSrc,
+				exclude: /node_modules/
+			}
+		]
+	},
 	optimization: {
 		splitChunks: {
 			chunks: "all",
