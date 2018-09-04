@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import * as url from "url";
-import * as gre from "./test";
 
 let mainWindow: BrowserWindow | null;
 
@@ -17,16 +16,12 @@ function createWindow() {
 	// console.log(c);
 
 	const indexPath = url.format({
-		pathname: path.join(__dirname, "../", "../", "index.html"),
+		pathname: path.join(__dirname, "index.html"),
 		protocol: "file:",
 		slashes: true
 	});
-	// tslint:disable-next-line:no-console
-	// console.log(indexPath);
 	mainWindow.loadURL(indexPath);
 
-	gre.greetings("hello");
-	gre.timeout(5);
 	mainWindow.webContents.on("did-finish-load", () => {
 		if (!mainWindow) {
 			throw new Error('"mainWindow" is not defined');

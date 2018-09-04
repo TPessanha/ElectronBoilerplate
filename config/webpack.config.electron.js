@@ -11,8 +11,8 @@ module.exports = merge(baseConfig, {
 	entry: { "app.min": appPaths.appSrcMain },
 	plugins: [],
 	output: {
-		filename: "static/js/[name].js",
-		chunkFilename: "static/js/[id].chunk.js"
+		filename: "[name].js",
+		chunkFilename: "[id].chunk.js"
 	},
 	target: "electron-main"
 });
