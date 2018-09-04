@@ -9,7 +9,6 @@ const baseConfig = require("./webpack.config.base");
 const appPaths = require("./appPaths");
 //plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 module.exports = merge(baseConfig, {
 	devtool: "cheap-module-source-map",
@@ -34,7 +33,6 @@ module.exports = merge(baseConfig, {
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-		new HardSourceWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: appPaths.appSrcHtmlTemplateEjs,

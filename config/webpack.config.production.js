@@ -9,6 +9,8 @@ const baseConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+	.BundleAnalyzerPlugin;
 
 module.exports = merge(baseConfig, {
 	target: "electron-renderer",
@@ -75,6 +77,11 @@ module.exports = merge(baseConfig, {
 				minifyCSS: true,
 				minifyURLs: true
 			}
+		}),
+
+		new BundleAnalyzerPlugin({
+			analyzerMode: "static",
+			openAnalyzer: false
 		})
 	]
 });

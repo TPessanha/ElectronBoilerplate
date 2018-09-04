@@ -3,6 +3,8 @@
  */
 
 const appPaths = require("./appPaths");
+// Plugins
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 //const { dependencies: externals } = require("./app/package.json");
@@ -186,6 +188,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "static/css/[name].[contenthash:8].css",
 			chunkFilename: "static/css/[id].[contenthash:8].css"
-		})
+		}),
+		new HardSourceWebpackPlugin()
 	]
 };
