@@ -4,8 +4,6 @@ let menu;
 let template;
 let mainWindow = null;
 
-require("electron-debug")();
-
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") app.quit();
 });

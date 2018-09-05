@@ -46,6 +46,7 @@ module.exports = {
 	appPackageJson: resolveApp("package.json"),
 	appSrc: resolveApp("src"),
 	appNodeModules: resolveApp("node_modules"),
+	resources: resolveApp("resources/build"),
 	publicUrl: getPublicUrl(resolveApp("package.json")),
 	servedPath: getServedPath(resolveApp("package.json"))
 };

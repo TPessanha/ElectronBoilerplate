@@ -8,12 +8,11 @@ function createWindow() {
 	mainWindow = new BrowserWindow({
 		show: false,
 		height: 600,
-		width: 800
+		width: 800,
+		webPreferences: {
+			devTools: false
+		}
 	});
-	// mainWindow.webContents.openDevTools();
-	// const c = gre.greetings("DELETED THIS ONLY HERE FOR TESTING");
-	// tslint:disable-next-line:no-console
-	// console.log(c);
 
 	const indexPath = url.format({
 		pathname: path.join(__dirname, "index.html"),

@@ -7,7 +7,6 @@ const merge = require("webpack-merge");
 const baseConfig = require("./webpack.config.base");
 // Plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 	.BundleAnalyzerPlugin;
@@ -72,10 +71,6 @@ module.exports = merge(baseConfig, {
 		]
 	},
 	plugins: [
-		new ManifestPlugin({
-			fileName: "asset-manifest.json"
-		}),
-
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: appPaths.appSrcHtmlTemplateEjs,
@@ -87,7 +82,17 @@ module.exports = merge(baseConfig, {
 				{
 					"http-equiv": "Content-Security-Policy",
 					content:
-						"default-src 'none'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; font-src 'self';"
+						"default-src 'none'; manifest-src 'self'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; font-src 'self';"
+				}
+			],
+			links: [
+				{
+					href: "/manifest.json",
+					rel: "manifest"
+				},
+				{
+					href: "/icon.ico",
+					rel: "shortcut icon"
 				}
 			],
 			minify: {
