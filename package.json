@@ -15,7 +15,7 @@
     "url": "https://github.com/TPessanha/ElectronBoilerplate"
   },
   "scripts": {
-    "build": "npm-run-all --parallel build:main build:renderer",
+    "build": "npm-run-all --parallel clean build:main build:renderer",
     "build:main": "cross-env NODE_ENV=production webpack --config config/webpack.config.electron.js --profile --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config config/webpack.config.production.js --profile --colors",
     "build:web": "npm run clean && cross-env NODE_ENV=production webpack --config config/webpack.config.production.web.js --profile --colors",

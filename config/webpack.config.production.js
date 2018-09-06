@@ -19,24 +19,22 @@ module.exports = merge(baseConfig, {
 			{
 				test: /\.(ts|tsx)$/,
 				enforce: "pre",
-				loader: "tslint-loader",
+				loader: require.resolve("tslint-loader"),
 				options: {
 					typeCheck: true,
 					emitErrors: true
 				},
-				include: appPaths.appSrc,
-				exclude: /node_modules/
+				include: appPaths.appSrc
 			},
 			{
 				test: /\.(js|jsx)$/,
 				enforce: "pre",
-				loader: "eslint-loader",
+				loader: require.resolve("eslint-loader"),
 				options: {
 					typeCheck: true,
 					emitErrors: true
 				},
-				include: appPaths.appSrc,
-				exclude: /node_modules/
+				include: appPaths.appSrc
 			}
 		]
 	},
@@ -82,17 +80,7 @@ module.exports = merge(baseConfig, {
 				{
 					"http-equiv": "Content-Security-Policy",
 					content:
-						"default-src 'none'; manifest-src 'self'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; font-src 'self';"
-				}
-			],
-			links: [
-				{
-					href: "/manifest.json",
-					rel: "manifest"
-				},
-				{
-					href: "/icon.ico",
-					rel: "shortcut icon"
+						"default-src 'none'; manifest-src 'self'; style-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; font-src 'self' https://cdn.joinhoney.com;"
 				}
 			],
 			minify: {

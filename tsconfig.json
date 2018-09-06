@@ -27,6 +27,13 @@
 			"*": ["node_modules/*"]
 		}
 	},
-	"include": ["src/**/*ts*"],
-	"exclude": ["node_modules", "dist", "release", "resources"]
+	"include": ["src/**/*.ts*"],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"release",
+		"resources",
+		"scripts",
+		"config"
+	]
 }

@@ -19,21 +19,12 @@ module.exports = merge(baseConfig, {
 	devtool: "cheap-module-source-map",
 	mode: process.env.NODE_ENV || "development",
 	entry: {
-		//"react-hot-loader/patch",
-		//`webpack-dev-server/client?http://localhost:${port}`,
-		//"webpack/hot/only-dev-server",
 		index: appPaths.appSrcIndex
 	},
 
 	output: {
 		filename: "index.js",
-		//publicPath: `http://localhost:${port}/dist/`,
-		libraryTarget: "var" //Allows browser viewing not sure if it should be var
-	},
-
-	module: {},
-	performance: {
-		hints: false
+		libraryTarget: "var"
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
