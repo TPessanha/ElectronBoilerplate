@@ -49,3 +49,6 @@ The following technologies are the main ones included in this boilerplate, click
 | [Sass](https://sass-lang.com)  | Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.  |
 | [Lodash](https://lodash.com/)  | A JavaScript utility library delivering consistency, modularity, performance, & extras.  |
 
+## Documentation
+
+Check out the [documentation](./.github/docs/documentation.md) for more.
