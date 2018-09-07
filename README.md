@@ -51,4 +51,4 @@ The following technologies are the main ones included in this boilerplate, click
 
 ## Documentation
 
-Check out the [documentation](./.github/docs/documentation.md) for more.
+Check out the [documentation](./.github/docs/DOCUMENTATION.md) for more.
