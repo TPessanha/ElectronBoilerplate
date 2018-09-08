@@ -160,7 +160,8 @@ module.exports = {
 
 	// A map from regular expressions to paths to transformers
 	transform: {
-		"^.+\\.(j|t)sx?$": "ts-jest",
+		"^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
+		"^.+\\.tsx?$": "ts-jest",
 		"^.+\\.(css|sass|scss|less)$": "<rootDir>/config/jest/cssTransform.js",
 		"^(?!.*\\.(js|jsx|ts|tsx|css|sass|scss|less|json)$)":
 			"<rootDir>/config/jest/fileTransform.js"
