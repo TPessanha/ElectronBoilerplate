@@ -3,7 +3,7 @@
 	"short_name": "Electron App",
 	"icons": [
 		{
-			"src": "/icon.ico",
+			"src": "/favicon.ico",
 			"sizes": "1024x1024 512x512 256x256 128x128 96x96 64x64 48x48 32x32 24x24 16x16",
 			"type": "image/x-icon"
 		},

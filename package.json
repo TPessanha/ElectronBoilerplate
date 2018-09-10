@@ -9,7 +9,7 @@
     "url": "https://github.com/TPessanha"
   },
   "license": "MIT",
-  "homepage": "https://github.com/TPessanha/ElectronBoilerplate",
+  "homepage": "https://example.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TPessanha/ElectronBoilerplate"
@@ -61,7 +61,7 @@
         "nsis",
         "portable"
       ],
-      "icon": "resources/build/icon.ico",
+      "icon": "resources/build/favicon.ico",
       "signingHashAlgorithms": [
         "sha256"
       ]
@@ -72,8 +72,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico"
+      "installerIcon": "build/favicon.ico",
+      "uninstallerIcon": "build/favicon.ico"
     },
     "linux": {
       "target": [

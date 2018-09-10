@@ -39,7 +39,7 @@ module.exports = merge(productionConfig, {
 					rel: "manifest"
 				},
 				{
-					href: "/icon.ico",
+					href: "/favicon.ico",
 					rel: "shortcut icon"
 				}
 			],
