@@ -120,7 +120,6 @@
     "jest"
   ],
   "devDependencies": {
-    "@babel/core": "^7.0.1",
     "@types/lodash": "^4.14.116",
     "@types/lodash-es": "^4.17.1",
     "@types/node": "^10.9.4",
@@ -130,7 +129,7 @@
     "ajv": "^6.5.3",
     "autoprefixer": "^9.1.5",
     "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.2",
+    "babel-loader": "^7.1.5",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
