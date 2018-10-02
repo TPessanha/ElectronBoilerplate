@@ -15,7 +15,7 @@ A short description of what each script does:
 | clean             | Runs any script that fits the pattern (remove:*).|
 | remove:dist       | Deletes everything inside /dist folder.|
 | dev               | Starts development mode with hot reloading.|
-| start:dev_server  | Starts up a development server to serve the page with hot-reload (read more about it [here](#start-dev-script)).|
+| start:dev_server  | Starts up a development server to serve the page with hot-reload (read more about it [here](#start-dev-server-script)).|
 | start:dev         | Starts the electron application in development mode with hot-reload.|
 | package           | Packages the electron app for the current plataform.|
 | package:win       | Packages the electron app for the windows x64 plataform.|
@@ -34,8 +34,8 @@ A short description of what each script does:
 | version           | Stages the changes made to version controlled files, you run this with "npm version" (Read more about it [here](https://docs.npmjs.com/cli/version)).|
 | postversion       | After version runs, this pushes the commited files and tags to remote.|
 
-### Start dev script
-The '`start:dev_server` script has some optional parameters to help in development:
+### Start dev server script
+The `start:dev_server` script has some optional parameters to help in development:
 
 1. `--startHot` will automatically start up the electron app by running the script `start:dev`,
 if you by any reason want to run another script instead of `start:dev` you can pass it like a parameter `--startHot <script>`.
