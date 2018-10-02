@@ -9,7 +9,7 @@ This project uses as base the [electron-react-typescript-boilerplate](https://gi
 
 # Getting Started
 
-1. **Install node (Last tested in release 8.11.4) #Skip if you already have Node installed**
+1. **Install node (Last tested on 8.11.4) #Skip if you already have Node installed**
 
     go to https://nodejs.org/en/ download and install node.
 
