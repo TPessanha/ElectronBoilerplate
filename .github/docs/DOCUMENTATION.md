@@ -15,7 +15,7 @@ A short description of what each script does:
 | clean             | Runs any script that fits the pattern (remove:*).|
 | remove:dist       | Deletes everything inside /dist folder.|
 | dev               | Starts development mode with hot reloading.|
-| start:dev_server  | Starts up a development server to serve the page with hot-reload (read more about it [here](#Start-dev-script)).|
+| start:dev_server  | Starts up a development server to serve the page with hot-reload (read more about it [here](#start-dev-script)).|
 | start:dev         | Starts the electron application in development mode with hot-reload.|
 | package           | Packages the electron app for the current plataform.|
 | package:win       | Packages the electron app for the windows x64 plataform.|
