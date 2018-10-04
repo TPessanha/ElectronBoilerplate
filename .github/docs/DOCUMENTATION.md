@@ -14,8 +14,8 @@ A short description of what each script does:
 | prestart          | Before start runs, this runs the clean and build scripts.|
 | clean             | Runs any script that fits the pattern (remove:*).|
 | remove:dist       | Deletes everything inside /dist folder.|
-| dev               | Starts development mode with hot reloading.|
-| start:dev_server  | Starts up a development server to serve the page with hot-reload (read more about it [here](#start-dev-server-script)).|
+| dev               | Starts development mode with hot reloading. (read more about it [here](#dev-script))|
+| start:dev_server  | Starts up a development server to serve the page with hot-reload .|
 | start:dev         | Starts the electron application in development mode with hot-reload.|
 | package           | Packages the electron app for the current plataform.|
 | package:win       | Packages the electron app for the windows x64 plataform.|
@@ -34,14 +34,28 @@ A short description of what each script does:
 | version           | Stages the changes made to version controlled files, you run this with "npm version" (Read more about it [here](https://docs.npmjs.com/cli/version)).|
 | postversion       | After version runs, this pushes the commited files and tags to remote.|
 
-### Start dev server script
-The `start:dev_server` script has some optional parameters to help in development:
+### dev script
+Use this in the development fase of your project, `npm start` uses a production ready build so it is slower and doesnt't have hot reaload.
+
+The `dev` script script has some optional parameters to help in development, these arguments are passed to the `start:dev_server` script, if you prefer you can put them directly in the `start:dev_server` script, the reason they are in `dev` is so you can call `start:dev_server` separatly if you want easier, the arguments are:
 
 1. `--startHot` will automatically start up the electron app by running the script `start:dev`,
 if you by any reason want to run another script instead of `start:dev` you can pass it like a parameter `--startHot <script>`.
 
 2. `--linkLife` will link the life of the electron app with the development server
 so if you close the app the server also closes, usefull so you don't have to close both every time.
+
+## Debugging (work in progress)
+
+If you are using [VS Code](https://code.visualstudio.com/) as your IDE you can debug the main and renderer processes doing the following:
+
+1. Install the [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) VS Code extension.
+
+2. Add the following configuration to your launch.json in .vscode.
+
+> Note: the URL may be different if you've made adjustments to the code or if the server can't use the 3000 port.
+
+Now you can debug your main and renderer process, to debug the renderer process you need to start the development server you can either run `dev` or `start:dev_server`, for the main process you only need to run it with `f5`.
 
 ## Developer tools
 
