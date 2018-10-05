@@ -34,7 +34,7 @@ A short description of what each script does:
 | version           | Stages the changes made to version controlled files, you run this with "npm version" (Read more about it [here](https://docs.npmjs.com/cli/version)).|
 | postversion       | After version runs, this pushes the commited files and tags to remote.|
 
-### dev script
+### Dev script
 Use this in the development fase of your project, `npm start` uses a production ready build so it is slower and doesnt't have hot reaload.
 
 The `dev` script script has some optional parameters to help in development, these arguments are passed to the `start:dev_server` script, if you prefer you can put them directly in the `start:dev_server` script, the reason they are in `dev` is so you can call `start:dev_server` separatly if you want easier, the arguments are:
@@ -45,17 +45,56 @@ if you by any reason want to run another script instead of `start:dev` you can p
 2. `--linkLife` will link the life of the electron app with the development server
 so if you close the app the server also closes, usefull so you don't have to close both every time.
 
-## Debugging (work in progress)
+## Debugging
 
 If you are using [VS Code](https://code.visualstudio.com/) as your IDE you can debug the main and renderer processes doing the following:
 
 1. Install the [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) VS Code extension.
 
-2. Add the following configuration to your launch.json in .vscode.
+2. Add the following to your launch.json in .vscode.
+```json
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Electron: Main",
+			"protocol": "inspector",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+			"runtimeArgs": [
+				"${workspaceRoot}/src/main.development.js",
+				"--remote-debugging-port=9223",
+				"."
+			],
+			"windows": {
+				"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+			}
+		},
+		{
+			"name": "Electron: Renderer",
+			"type": "chrome",
+			"request": "attach",
+			"port": 9223,
+			"webRoot": "${workspaceFolder}",
+			"timeout": 30000
+		}
+	],
+	"compounds": [
+		{
+			"name": "Electron: All",
+			"configurations": [
+				"Electron: Main",
+				"Electron: Renderer"
+			]
+		}
+	]
+}
+```
 
-> Note: the URL may be different if you've made adjustments to the code or if the server can't use the 3000 port.
+Now you can debug your main and renderer process, to debug the renderer process you need to start the development server with `start:dev_server`, for the main process you only need to run it but no content will be displayed in the electron app.
 
-Now you can debug your main and renderer process, to debug the renderer process you need to start the development server you can either run `dev` or `start:dev_server`, for the main process you only need to run it with `f5`.
+You can run both with `Electron: All`.
 
 ## Developer tools
 
