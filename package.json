@@ -41,7 +41,9 @@
     "format:all": "prettier --write \"*/**/*.{js,jsx,ts,tsx,json,css,scss,sass,less,yaml,md}\"",
     "preversion": "npm-run-all lint test format:all",
     "version": "git add -A",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "build": {
     "productName": "ElectronBoilerplate",
@@ -193,9 +195,11 @@
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "snyk": "^1.317.0"
   },
   "engines": {
     "node": "8.11.3"
-  }
+  },
+  "snyk": true
 }
